@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2021-06-02T02:38:31.989Z</updated>
+  <updated>2021-06-02T07:05:05.723Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -15,6 +15,28 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title></title>
+    <link href="http://example.com/2021/06/02/%E6%90%AD%E5%BB%BAhexo/"/>
+    <id>http://example.com/2021/06/02/%E6%90%AD%E5%BB%BAhexo/</id>
+    <published>2021-06-02T07:03:01.483Z</published>
+    <updated>2021-06-02T07:05:05.723Z</updated>
+    
+    <content type="html"><![CDATA[<p>1.安装Git</p><p><a href="https://gitforwindows.org/">下载地址</a>，下载后，一路安装即可。</p><h2 id="2-安装nodejs"><a href="#2-安装nodejs" class="headerlink" title="2.安装nodejs"></a>2.安装nodejs</h2><p><a href="https://nodejs.org/en/download/">下载地址</a>，选择Windows Installer(.msi) 64-bit，一路安装。</p><p>安装后，git bash中检测是否成功</p><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">node -v</span><br><span class="line">npm -v</span><br></pre></td></tr></table></figure><h3 id="3-安装hexo"><a href="#3-安装hexo" class="headerlink" title="3.安装hexo"></a>3.安装hexo</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install -g hexo-cli</span><br></pre></td></tr></table></figure><p>使用<code>hexo -v</code>查看版本。</p><p>在某一路径下新建一blog文件夹，执行</p><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo init</span><br></pre></td></tr></table></figure><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install</span><br></pre></td></tr></table></figure><p>再执行</p><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo g</span><br></pre></td></tr></table></figure><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo s</span><br></pre></td></tr></table></figure><p>此时可以在浏览器中输入localhost:4000查看生成的本地博客。</p><p>4.创建github仓库</p><p>仓库名为<code>xxx.github.io</code>，其中<code>xxx</code>为你的用户名，区分大小写。</p><p>5.生成ssh</p><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git config --global user.name <span class="string">&quot;yourname&quot;</span></span><br></pre></td></tr></table></figure><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gitconfig --global user.email <span class="string">&quot;youremail&quot;</span></span><br></pre></td></tr></table></figure><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t rsa -C <span class="string">&quot;youremail&quot;</span></span><br></pre></td></tr></table></figure><p><code>yourname</code>和<code>youremail</code>分别对应github的用户名和邮箱。</p><p>找到电脑中生成的<code>id_rsa.pub</code>文件，里面数据即为公钥，复制公钥，在github中新建SSH key。</p><p>查看是否成功</p><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh -T git@github.com</span><br></pre></td></tr></table></figure><h3 id="6-将hexo推送至github仓库"><a href="#6-将hexo推送至github仓库" class="headerlink" title="6.将hexo推送至github仓库"></a>6.将hexo推送至github仓库</h3><p>打开blog中的<code>_config.yml</code>，拉到最后，修改为：</p><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">deploy:  type: git  repo: https:<span class="comment">//github.com/yourname/yourname.github.io.git  branch: main</span></span><br></pre></td></tr></table></figure><p>注意：</p><ul><li>yourname换成自己的用户名</li><li>branch一定对应自己仓库的分支，之前创建仓库默认分支是master，后来默认为main。</li></ul><p>安装deploy-git</p><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure><p>推送至仓库</p><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo clean</span><br></pre></td></tr></table></figure><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo g -d</span><br></pre></td></tr></table></figure><h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="https://blog.csdn.net/sinat_37781304/article/details/82729029">hexo史上最全搭建教程</a></p><p><a href="https://blog.csdn.net/natahew/article/details/81387885">解决github 打开、拉取、推送速度慢的问题</a></p><p><a href="https://blog.csdn.net/Hodors/article/details/103226958?utm_medium=distribute.pc_relevant.none-task-blog-2~default~BlogCommendFromMachineLearnPai2~default-1.control&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2~default~BlogCommendFromMachineLearnPai2~default-1.control">解决 Failed to connect to github.com port 443:connection timed out</a></p><p><a href="https://blog.csdn.net/yy339452689/article/details/104040279">【开发工具的那些故事】git问题记录（一）： Failed to connect to github.com port 443: Timed out</a></p><p><a href="https://blog.csdn.net/weixin_43945983/article/details/110882074">Git报错解决：OpenSSL SSL_read: Connection was reset, errno 10054 错误解决</a></p><p><a href="https://github.com/HHT0506/HHT0506.github.io.git/">Hexo启动页面显示extends includes/layout.pug block content include includes/recent-posts.pug include</a></p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;1.安装Git&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://gitforwindows.org/&quot;&gt;下载地址&lt;/a&gt;，下载后，一路安装即可。&lt;/p&gt;
+&lt;h2 id=&quot;2-安装nodejs&quot;&gt;&lt;a href=&quot;#2-安装nodejs&quot; class=&quot;headerlink&quot;</summary>
+      
+    
+    
+    
+    
+  </entry>
   
   <entry>
     <title>Hello World</title>
